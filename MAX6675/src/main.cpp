@@ -29,9 +29,9 @@ double readMAX6675() {
 void loop() {
   double temp = readMAX6675();
   if (isnan(temp)) {
-    Serial.println("Loi: Khong doc duoc cam bien Type-K!");
+    Serial.println("Error");
   } else {
-    Serial.print("Nhiet do: ");
+    Serial.print("Temperature: ");
     Serial.print(temp);
     Serial.println(" *C");
   }
