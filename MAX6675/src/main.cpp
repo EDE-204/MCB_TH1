@@ -5,7 +5,7 @@ int thermoSO = 19;
 int thermoCS = 5;
 int thermoSCK = 18;
 
-MAX6675 thermocouple(thermoSCK, thermoCS, thermoSO);
+MAX6675 therm(thermoSCK, thermoCS, thermoSO);
 
 void setup() {
   Serial.begin(9600);
@@ -14,7 +14,7 @@ void setup() {
 }
 
 void loop() {
-  float temperature = thermocouple.readCelsius();
+  float temp = therm.readCelsius();
 
   Serial.print("Temperature: ");
   Serial.print(temp);
