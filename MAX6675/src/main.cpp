@@ -17,7 +17,7 @@ void loop() {
   float temperature = thermocouple.readCelsius();
 
   Serial.print("Temperature: ");
-  Serial.print(temperature);
+  Serial.print(temp);
   Serial.println(" °C");
 
   delay(1000);
