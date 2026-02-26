@@ -1,39 +1,24 @@
 #include <Arduino.h>
-#include <SPI.h>
+#include <max6675.h>
 
-#define MAX6675_CS 5 
+int thermoSO = 19;
+int thermoCS = 5;
+int thermoSCK = 18;
+
+MAX6675 thermocouple(thermoSCK, thermoCS, thermoSO);
 
 void setup() {
   Serial.begin(9600);
-  SPI.begin();              
-  pinMode(MAX6675_CS, OUTPUT);
-  digitalWrite(MAX6675_CS, HIGH);
-
-  Serial.println("MAX6675 test...");
-}
-
-double readMAX6675() {
-  uint16_t value = 0;
-  digitalWrite(MAX6675_CS, LOW);
-  delayMicroseconds(10);
-  value = SPI.transfer16(0x0000);
-  digitalWrite(MAX6675_CS, HIGH);
-  if (value & 0x0004) {
-    return NAN;  
-  }
-  value >>= 3;
-  double tempC = value * 0.25;
-  return tempC;
+  delay(500);
+  Serial.println("MAX6675 test");
 }
 
 void loop() {
-  double temp = readMAX6675();
-  if (isnan(temp)) {
-    Serial.println("Error");
-  } else {
-    Serial.print("Temperature: ");
-    Serial.print(temp);
-    Serial.println(" *C");
-  }
+  float temperature = thermocouple.readCelsius();
+
+  Serial.print("Temperature: ");
+  Serial.print(temperature);
+  Serial.println(" °C");
+
   delay(1000);
 }
