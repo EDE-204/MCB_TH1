@@ -4,7 +4,6 @@
 int thermoSO = 19;
 int thermoCS = 5;
 int thermoSCK = 18;
-
 MAX6675 therm(thermoSCK, thermoCS, thermoSO);
 
 void setup() {
